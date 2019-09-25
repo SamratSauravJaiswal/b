@@ -47,8 +47,9 @@ const Size = mongoose.model('Size', sizeSchema);
 const User = mongoose.model('User', userSchema);
 
 app.post('/api/createStyle', function(req, res) {
-  console.log("create headers-->" ,req.headers);
+  console.log('create headers-->', req.headers);
   const body = JSON.parse(req.body);
+  console.log('create body-->', req.body);
   const style = new Style({
     value: body.value,
     price: body.price
