@@ -123,7 +123,7 @@ router.post('/pay', (req, res) => {
   Insta.createPayment(data, function(error, response) {
     console.log('/pay 124-->', response);
     if (error) {
-      console.log("126-->"error);
+      console.log("126-->",error);
     } else {
       const responseData = JSON.parse(response);
       const redirectUrl = responseData.payment_request.longurl;
