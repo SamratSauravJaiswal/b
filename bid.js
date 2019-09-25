@@ -102,7 +102,6 @@ const url = require('url');
 // /api/bid/pay
 router.post('/pay', (req, res) => {
   const body = JSON.parse(req.body);
-  console.log('/pay headers-->', req.headers);
   temp1 = body;
 
   Insta.setKeys('test_c496eefc2cceece396905f07440', 'test_b7781fba1a5e484e80cde59e36b');
@@ -122,25 +121,23 @@ router.post('/pay', (req, res) => {
   data.allow_repeated_payments = false;
 
   Insta.createPayment(data, function(error, response) {
+    console.log('/pay 124', response);
     if (error) {
       console.log(error);
     } else {
       const responseData = JSON.parse(response);
-      console.log('/pay 46', responseData);
       const redirectUrl = responseData.payment_request.longurl;
-      console.log('/pay 48', redirectUrl);
       res.send(redirectUrl);
     }
   });
 });
 
-/**
+/** 
  * @route GET api/bid/callback/
  * @desc Call back url for instamojo
  * @access public
  */
 router.get('/callback/', (req, res) => {
-  console.log('/callback 61 trigger!!!');
   let url_parts = url.parse(req.url, true),
     responseData = url_parts.query;
 
