@@ -121,9 +121,9 @@ router.post('/pay', (req, res) => {
   data.allow_repeated_payments = false;
 
   Insta.createPayment(data, function(error, response) {
-    console.log('/pay 124', response);
+    console.log('/pay 124-->', response);
     if (error) {
-      console.log(error);
+      console.log("126-->"error);
     } else {
       const responseData = JSON.parse(response);
       const redirectUrl = responseData.payment_request.longurl;
