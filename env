@@ -1,0 +1,3 @@
+DATABASE=mongodb+srv://java:gogomaster@database-qrvyh.mongodb.net/cf
+PORT=8001
+
