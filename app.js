@@ -9,7 +9,7 @@ const bid = require('./bid');
 const app = express();
 
 mongoose
-  .connect(process.env.DATABASE, {
+  .connect('mongodb+srv://java:gogomaster@database-qrvyh.mongodb.net/cf', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -87,6 +87,8 @@ app.get('/api/styleList', function(req, res) {
   });
 });
 
+// sign up 
+
 app.post('/api/register', function(req, res) {
   const body = JSON.parse(req.body);
   const newUser = new User({
@@ -101,6 +103,9 @@ app.post('/api/register', function(req, res) {
     }
   });
 });
+
+
+// login 
 
 app.post('/api/login', function(req, res) {
   User.findOne({ email: req.body.username }, function(err, foundUser) {
