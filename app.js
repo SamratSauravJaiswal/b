@@ -107,7 +107,6 @@ app.get('/api/styleList', function(req, res) {
 });
 
 // sign up
-
 app.post('/api/register', function(req, res) {
   const body = JSON.parse(req.body);
   const newUser = new User({
@@ -124,7 +123,6 @@ app.post('/api/register', function(req, res) {
 });
 
 // login
-
 app.post('/api/login', function(req, res) {
   User.findOne({ email: req.body.username }, function(err, foundUser) {
     if (err) {
@@ -140,7 +138,6 @@ app.post('/api/login', function(req, res) {
     }
   });
 });
-
 const port = process.env.PORT || 8001;
 
 app.listen(port, () => {
