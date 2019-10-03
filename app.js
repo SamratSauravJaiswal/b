@@ -32,6 +32,10 @@ const styleSchema = {
   price: Number
 };
 
+const imageSchema = {
+  value: Object
+};
+
 const sizeSchema = {
   value: String,
   price: Number
@@ -43,6 +47,7 @@ const userSchema = {
 };
 
 const Style = mongoose.model('Style', styleSchema);
+const Image = mongoose.model('Image', imageSchema);
 const Size = mongoose.model('Size', sizeSchema);
 const User = mongoose.model('User', userSchema);
 
@@ -75,6 +80,20 @@ app.post('/api/createSize', function(req, res) {
   });
 });
 
+app.post('/api/saveImage', function(req, res) {
+  console.log('old', req.body);
+  const body = JSON.parse(req.body);
+  console.log(body);
+  const image = new Image({
+    value: body
+  });
+  image.save(function(err) {
+    if (!err) {
+      console.log('Img saved to DB');
+    }
+  });
+});
+
 app.get('/api/sizeList', function(req, res) {
   Size.find({}, function(err, sizes) {
     res.send(sizes);
@@ -87,7 +106,7 @@ app.get('/api/styleList', function(req, res) {
   });
 });
 
-// sign up 
+// sign up
 
 app.post('/api/register', function(req, res) {
   const body = JSON.parse(req.body);
@@ -104,8 +123,7 @@ app.post('/api/register', function(req, res) {
   });
 });
 
-
-// login 
+// login
 
 app.post('/api/login', function(req, res) {
   User.findOne({ email: req.body.username }, function(err, foundUser) {
