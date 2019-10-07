@@ -52,22 +52,28 @@ const Size = mongoose.model('Size', sizeSchema);
 const User = mongoose.model('User', userSchema);
 
 app.post('/api/createStyle', function(req, res) {
-  console.log('create headers-->', req.headers);
   const body = JSON.parse(req.body);
-  console.log('create body-->', req.body);
-  const style = new Style({
-    value: body.value,
-    price: body.price
-  });
+  // const style = new Style({
+  //   value: body.value,
+  //   price: body.price
+  // });
 
-  style.save(function(err) {
-    if (!err) {
-      console.log('style saved to database');
-    }
-  });
+
+  // style.save(function(err) {
+  //   if (!err) {
+  //     console.log('style saved to database');
+  //   }
+  // });
+
+  Style.findOne({value : body.value}, function(err, doc){
+    doc.price = body.price;
+    doc.save();
+  })
 });
 
 app.post('/api/createSize', function(req, res) {
+  console.log("call post");
+  
   const body = JSON.parse(req.body);
   const size = new Size({
     value: body.value,
@@ -96,7 +102,7 @@ app.post('/api/saveImage', function(req, res) {
 
 app.get('/api/sizeList', function(req, res) {
   Size.find({}, function(err, sizes) {
-    res.send(sizes);
+    res.send(sizes);    
   });
 });
 
